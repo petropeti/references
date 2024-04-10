@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:view="clr-namespace:ConnectFourMAUI.View"
+             x:Class="ConnectFourMAUI.View.MainPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="MainButtonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="BackgroundColor" Value="Orange" />
+                <Setter Property="BorderColor" Value="Orange" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="Margin" Value="4" />
+                <Setter Property="WidthRequest" Value="80" />
+                <Setter Property="HeightRequest" Value="40" />
+            </Style>
+            <Style x:Key="FieldStyle" TargetType="Button">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="BorderColor" Value="Black" />
+                <Setter Property="BorderWidth" Value="1" />
+                <Setter Property="CornerRadius" Value="0" />
+                
+                <Style.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding Color}" Value="0">
+                        <Setter Property="Background" Value="White" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding Color}" Value="1">
+                        <Setter Property="Background" Value="Red" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding Color}" Value="2">
+                        <Setter Property="Background" Value="Yellow" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding Color}" Value="-1">
+                        <Setter Property="Background" Value="Green" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <HorizontalStackLayout HorizontalOptions="Start" Grid.Row="0">
+            <Button Command="{Binding NewGameCommand}" Text="New" Style="{StaticResource MainButtonStyle}" />
+            <Button Command="{Binding LoadGameCommand}" Text="Load" Style="{StaticResource MainButtonStyle}" />
+            <Button Command="{Binding SaveGameCommand}" Text="Save" Style="{StaticResource MainButtonStyle}" />
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout HorizontalOptions="Start" Grid.Row="1">
+            <Button Command="{Binding SizeChangeCommand}" CommandParameter="10" Text="10x10" Style="{StaticResource MainButtonStyle}" />
+            <Button Command="{Binding SizeChangeCommand}" CommandParameter="20" Text="20x20" Style="{StaticResource MainButtonStyle}" />
+            <Button Command="{Binding SizeChangeCommand}" CommandParameter="30" Text="30x30" Style="{StaticResource MainButtonStyle}" />
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout HorizontalOptions="Start" Grid.Row="2">
+            <Label Text="PlayerX's time:" Margin="5" FontSize="14" FontAttributes="Bold"/>
+            <Label Text="{Binding TimePlayerX}" Margin="5" FontSize="14" FontAttributes="Bold"/>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout HorizontalOptions="Start" Grid.Row="3">
+            <Label Text="PlayerO's time:" Margin="5" FontSize="14" FontAttributes="Bold"/>
+            <Label Text="{Binding TimePlayerO}" Margin="5" FontSize="14" FontAttributes="Bold"/>
+        </HorizontalStackLayout>
+        
+        <Button Text="{Binding PauseButtonText}" Command="{Binding PauseCommand}" Style="{StaticResource MainButtonStyle}" HeightRequest="80" WidthRequest="150" Grid.Row="2" Grid.RowSpan="2" HorizontalOptions="End"/>
+
+        <Label Text="{Binding CurrentPlayer}" Margin="5" FontSize="20" FontAttributes="Bold" Grid.Row="4" HorizontalOptions="Start"/>
+
+        <Grid BindableLayout.ItemsSource="{Binding Fields}" HorizontalOptions="Center" VerticalOptions="Center"
+                RowDefinitions="{Binding RowDefinitions}" ColumnDefinitions="{Binding ColumnDefinitions}" Grid.Row="5">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Button Command="{Binding FieldChangeCommand}" CommandParameter="{Binding}" Text="{Binding Player}"
+                            IsEnabled="{Binding IsEnabled}" Style="{StaticResource FieldStyle}" FontSize="{Binding FontSize}"
+                            Grid.Row="{Binding X}" Grid.Column="{Binding Y}" Padding="0"
+                            HeightRequest="{Binding Length}" WidthRequest="{Binding Length}"/>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </Grid>
+
+    </Grid>
+</ContentPage>
