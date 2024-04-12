@@ -53,7 +53,14 @@ async def create_event(event: Event):
 
 @router.put("/events/{event_id}", response_model=Event)
 async def update_event(event_id: int, event: Event):
-    pass
+    event_manager = EventFileManager()
+    events = event_manager.read_events_from_file()
+    for e in events:
+        if e['id'] == event_id:
+            e.update(event.dict())
+            event_manager.write_events_to_file(events)
+            return e
+    return HTTPException(status_code=404, detail="Event not found")
 
 
 @router.delete("/events/{event_id}")
