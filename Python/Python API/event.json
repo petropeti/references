@@ -18,5 +18,25 @@
         ],
         "location": "Budapest, Hungary",
         "max_attendees": 100
+    },
+    {
+        "id": 2,
+        "name": "Proba",
+        "date": "2024-04-12",
+        "organizer": {
+            "name": "Peter",
+            "email": "petropeti0401@gmail.com"
+        },
+        "status": "active",
+        "type": "event",
+        "joiners": [
+            {
+                "name": "Teszt Elek",
+                "email": "test@test.com",
+                "country": "Hungary"
+            }
+        ],
+        "location": "Budapest, Hungary",
+        "max_attendees": 20
     }
 ]

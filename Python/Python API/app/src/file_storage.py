@@ -1,14 +1,12 @@
 import json
 
 class EventFileManager:
-    FILE_PATH = 'events.json'
+    FILE_PATH = "event.json"
 
     def read_events_from_file(self):
         try:
             with open(self.FILE_PATH, 'r') as file:
                 events = json.load(file)
-        except FileNotFoundError:
-            events = []
         except Exception as e:
             print(f"Error reading events file: {e}")
             events = []
