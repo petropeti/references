@@ -41,7 +41,14 @@ async def get_event_by_id(event_id: int):
 
 @router.post("/events", response_model=Event)
 async def create_event(event: Event):
-    pass
+    event_manager = EventFileManager()
+    events = event_manager.read_events_from_file()
+    for e in events:
+        if e['id'] == event.id:
+            return HTTPException(status_code=400, detail="Event ID already exists")
+    events.append(event.dict())
+    event_manager.write_events_to_file(events)
+    return event
 
 
 @router.put("/events/{event_id}", response_model=Event)

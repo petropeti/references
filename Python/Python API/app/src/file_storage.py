@@ -16,6 +16,6 @@ class EventFileManager:
     def write_events_to_file(self, events):
         try:
             with open(self.FILE_PATH, 'w') as file:
-                json.dump(events, file)
+                json.dump(events, file, indent=4)
         except Exception as e:
             print(f"Error writing events to file: {e}")
