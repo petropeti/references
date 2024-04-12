@@ -1,7 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from typing import List
 from .models import Event
-from .models import Event
 from .file_storage import EventFileManager
 
 router = APIRouter()
