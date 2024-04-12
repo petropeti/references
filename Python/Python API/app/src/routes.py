@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException
 from typing import List
 from .models import Event
 from .file_storage import EventFileManager
+from .event_analyzer import EventAnalyzer
 
 router = APIRouter()
 
@@ -24,7 +25,8 @@ async def get_events_by_filter(date: str = None, organizer: str = None, status: 
         (status==None or event['status'] == status) and\
         (event_type==None or event['type'] == event_type):
             filtered_events.append(event)
-    
+    if filtered_events == []:
+        raise HTTPException(status_code=404, detail="Event not found")
     return filtered_events
 
 
@@ -35,7 +37,7 @@ async def get_event_by_id(event_id: int):
     for event in events:
         if event['id'] == event_id:
             return event
-    return HTTPException(status_code=404, detail="Event not found")
+    raise HTTPException(status_code=404, detail="Event not found")
 
 
 @router.post("/events", response_model=Event)
@@ -44,7 +46,7 @@ async def create_event(event: Event):
     events = event_manager.read_events_from_file()
     for e in events:
         if e['id'] == event.id:
-            return HTTPException(status_code=400, detail="Event ID already exists")
+            raise HTTPException(status_code=400, detail="Event ID already exists")
     events.append(event.dict())
     event_manager.write_events_to_file(events)
     return event
@@ -59,7 +61,7 @@ async def update_event(event_id: int, event: Event):
             e.update(event.dict())
             event_manager.write_events_to_file(events)
             return e
-    return HTTPException(status_code=404, detail="Event not found")
+    raise HTTPException(status_code=404, detail="Event not found")
 
 
 @router.delete("/events/{event_id}")
@@ -76,4 +78,11 @@ async def delete_event(event_id: int):
 
 @router.get("/events/joiners/multiple-meetings")
 async def get_joiners_multiple_meetings():
-    pass
+    event_manager = EventFileManager()
+    events = event_manager.read_events_from_file()
+    event_analyzer = EventAnalyzer()
+    joiners = event_analyzer.get_joiners_multiple_meetings_method(events)
+    if joiners == []:
+        return {"message": "No joiners attending at least 2 meetings"}
+    return joiners
+

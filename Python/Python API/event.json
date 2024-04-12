@@ -41,7 +41,7 @@
     },
     {
         "id": 3,
-        "name": "string",
+        "name": "Hello",
         "date": "string",
         "organizer": {
             "name": "string",
@@ -51,8 +51,88 @@
         "type": "string",
         "joiners": [
             {
-                "name": "string",
+                "name": "Zolika",
                 "email": "string",
+                "country": "string"
+            }
+        ],
+        "location": "string",
+        "max_attendees": 0
+    },
+    {
+        "id": 5,
+        "name": "Proba5",
+        "date": "string",
+        "organizer": {
+            "name": "string",
+            "email": "string"
+        },
+        "status": "string",
+        "type": "string",
+        "joiners": [
+            {
+                "name": "Pistike",
+                "email": "string",
+                "country": "string"
+            }
+        ],
+        "location": "string",
+        "max_attendees": 0
+    },
+    {
+        "id": 6,
+        "name": "Proba5",
+        "date": "string",
+        "organizer": {
+            "name": "string",
+            "email": "string"
+        },
+        "status": "string",
+        "type": "string",
+        "joiners": [
+            {
+                "name": "Zolika",
+                "email": "string",
+                "country": "string"
+            },
+            {
+                "name": "Pistike",
+                "email": "string",
+                "country": "string"
+            }
+        ],
+        "location": "string",
+        "max_attendees": 0
+    },
+    {
+        "id": 4,
+        "name": "Proba5",
+        "date": "string",
+        "organizer": {
+            "name": "string",
+            "email": "string"
+        },
+        "status": "string",
+        "type": "string",
+        "joiners": [
+            {
+                "name": "Zolika",
+                "email": "string",
+                "country": "string"
+            },
+            {
+                "name": "Pistike",
+                "email": "p.istvan@gmail.com",
+                "country": "string"
+            },
+            {
+                "name": "Teszt Elek",
+                "email": "string",
+                "country": "string"
+            },
+            {
+                "name": "Pistike",
+                "email": "pistivagyok@gamil.com",
                 "country": "string"
             }
         ],
