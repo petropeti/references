@@ -58,25 +58,5 @@
         ],
         "location": "string",
         "max_attendees": 0
-    },
-    {
-        "id": 6,
-        "name": "UjProba",
-        "date": "string",
-        "organizer": {
-            "name": "string",
-            "email": "string"
-        },
-        "status": "string",
-        "type": "string",
-        "joiners": [
-            {
-                "name": "string",
-                "email": "string",
-                "country": "string"
-            }
-        ],
-        "location": "string",
-        "max_attendees": 0
     }
 ]
